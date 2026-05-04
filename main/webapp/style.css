@@ -1,0 +1,112 @@
+/* 1. Định nghĩa các màu sắc chủ đạo (Variables) */
+:root {
+    --ghibli-green: #386641;
+    --ghibli-red: #BC4749;
+    --ghibli-yellow: #F2E8CF;
+    --ghibli-dark: #3E2723;
+    --navbar-height: 70px;
+}
+
+/* 2. Cài đặt chung cho toàn bộ trang web */
+body {
+    background-color: #fdf9f1 !important;
+    font-family: 'Patrick Hand', cursive;
+    /* Đảm bảo nội dung không bị che khuất bởi navbar sticky */
+    padding-top: calc(var(--navbar-height) + 20px) !important;
+    color: var(--ghibli-dark);
+}
+
+/* 3. Style dành riêng cho Thanh điều hướng (Navbar) */
+.navbar-ghibli {
+    background-color: rgba(253, 249, 241, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--ghibli-green);
+    height: var(--navbar-height);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand-ghibli {
+    font-family: 'Pangolin', cursive;
+    font-weight: bold;
+    color: var(--ghibli-green) !important;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-link-ghibli {
+    color: var(--ghibli-dark) !important;
+    font-family: 'Pangolin', cursive;
+    font-weight: 600;
+    margin: 0 10px;
+    transition: 0.3s ease;
+}
+
+.nav-link-ghibli:hover, .nav-link-ghibli.active {
+    color: var(--ghibli-red) !important;
+    transform: translateY(-2px);
+}
+
+/* Panel người dùng trên Navbar */
+.nav-user-info {
+    background: var(--ghibli-yellow);
+    border: 2px dashed var(--ghibli-green);
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-family: 'Pangolin', cursive;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 2px 2px 0px rgba(56, 102, 65, 0.1);
+}
+
+/* 4. Style cho Card sản phẩm */
+.product-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 20px !important;
+    border: 2px solid #eee !important;
+    background: white;
+    overflow: hidden;
+    height: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-10px) rotate(-0.5deg);
+    border-color: var(--ghibli-green) !important;
+    box-shadow: 0 15px 30px rgba(56, 102, 65, 0.15);
+}
+
+/* 5. Nút bấm phong cách Ghibli */
+.btn-ghibli {
+    background: white;
+    border: 2px solid var(--ghibli-green);
+    color: var(--ghibli-green);
+    border-radius: 25px;
+    padding: 8px 25px;
+    font-weight: bold;
+    font-family: 'Pangolin', cursive;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-ghibli:hover, .btn-ghibli.active {
+    background: var(--ghibli-green);
+    color: white !important;
+    box-shadow: 4px 4px 0px var(--ghibli-yellow);
+    text-decoration: none;
+}
+
+/* 6. Huy hiệu cấp độ */
+.badge-level {
+    background: var(--ghibli-green);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
