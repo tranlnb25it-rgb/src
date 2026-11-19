@@ -1,47 +1,49 @@
 <?php
-require 'db.php';
-$result = mysqli_query($conn, "SELECT * FROM Users ORDER BY admin_id DESC");
+// BÀI 2. Form gửi email (nhập người nhận, tiêu đề, nội dung, file đính kèm)
+$thongbao = $_GET['msg'] ?? '';
+$loi      = $_GET['err'] ?? '';
 ?>
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh sách Nhân sự - Frontend</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #f4f6f9; }
-        .user-card { transition: transform 0.2s; border: none; border-radius: 12px; overflow: hidden; }
-        .user-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .avatar-img { height: 220px; object-fit: cover; width: 100%; }
-     </style>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DEMO GỬI EMAIL</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
-<body>  
-    <nav class="navbar navbar-dark bg-primary mb-4 shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.php">HỆ THỐNG NHÂN SỰ</a>
-            <a href="admin.php" class="btn btn-light btn-sm fw-semibold">Vào trang Quản trị (Admin)</a>
-        </div>
-    </nav>
+<body>
+<div class="container py-4" style="max-width: 720px">
+    <h2>Email tới bạn</h2>
+    <p><a href="bai3.php">→ Bài 3: gửi cho nhiều người</a></p>
 
-    <div class="container">
-        <h3 class="text-center mb-4 fw-bold text-dark">DANH SÁCH NGƯỜI DÙNG (USERS)</h3>
-        <div class="row g-4">
-            <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="card user-card shadow-sm h-100">
-                        <img src="uploads/<?= htmlspecialchars($row['images']) ?>" class="avatar-img" alt="Avatar" onerror="this.src='https://via.placeholder.com/300x220?text=No+Image'">
-                        <div class="card-body text-center">
-                            <span class="badge bg-secondary mb-2">ID: #<?= $row['admin_id'] ?></span>
-                            <h6 class="card-title text-truncate fw-bold" title="<?= htmlspecialchars($row['admin_email']) ?>">
-                                <?= htmlspecialchars($row['admin_email']) ?>
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-            <?php endwhile; ?>
+    <?php if ($thongbao): ?>
+        <div class="alert alert-success"><?= htmlspecialchars($thongbao) ?></div>
+    <?php endif; ?>
+    <?php if ($loi): ?>
+        <div class="alert alert-danger"><?= htmlspecialchars($loi) ?></div>
+    <?php endif; ?>
+
+    <form action="mail.php" enctype="multipart/form-data" method="POST">
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" placeholder="Email" required>
         </div>
-    </div>
+        <div class="mb-3">
+            <label class="form-label">Subject</label>
+            <input type="text" class="form-control" name="tieude" placeholder="Tiêu đề" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Nội dung</label>
+            <textarea name="content" id="editor" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">File đính kèm</label>
+            <input type="file" class="form-control" name="file">
+        </div>
+        <button type="submit" class="btn btn-primary">Gửi</button>
+    </form>
+</div>
+<script>CKEDITOR.replace('editor');</script>
 </body>
-</html> 
+</html>
